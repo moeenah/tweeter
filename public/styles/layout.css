@@ -9,6 +9,9 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
 
 /*
  * Global layout stuff
@@ -23,3 +26,12 @@ body {
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+main {
+  width: 450px;
+  height: 100vw;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  padding-top: 140px;
+  margin-bottom: 50px;
+}
