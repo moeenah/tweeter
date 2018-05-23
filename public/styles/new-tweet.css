@@ -1,4 +1,4 @@
-#tweet-area {
+.new-tweet {
   background-color: #eeeeef;
   border-radius: 5px;
   height:150px;
@@ -6,24 +6,24 @@
   margin-right: 2em;
 }
 
-#tweet-area h2 {
+.new-tweet h2 {
   border-bottom: 1px solid black;
   margin-left: 0.5em;
   margin-right: 0.5em;
   padding-top: 0.5em;
 }
 
-#tweet-area .text {
+.new-tweet .text {
   margin-left: 0.5em;
   margin-right: 0.5em;
   width: 370px;
   height: 50px;
 }
 
-#tweet-area input {
+.new-tweet input {
   margin-left: 0.5em;
 }
 
-#tweet-area .counter {
+.new-tweet .counter {
   margin-left: 17.5em;
 }
