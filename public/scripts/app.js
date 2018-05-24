@@ -4,61 +4,54 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
- // Test / driver code (temporary). Eventually will get this from the server.
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
-
 function renderTweets(tweets) {
-  data.forEach(function(user) {
+
+
+  if (tweets instanceof Array) {
+    tweets.forEach(function(user) {
     let $data = createTweetElement(user);
     $(document).ready(function() {
-    $('.container').append($data);
+      $('.container').prepend($data).prepend($('.new-tweet'));
     });
   });
+  } else {
+    let $data = createTweetElement(tweets);
+    $(document).ready(function() {
+      $('.container').prepend($data).prepend($('.new-tweet'));
+    });
+}
+
+}
+
+function escape(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+function tweetDate (date) {
+  const today = new Date();
+  const dateMili = new Date(date);
+  const timeDiff = Math.abs(dateMili.getTime() - today.getTime());
+  const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+
+  //checks if time is greater than one day
+  if (timeDiff >= 86400000) {
+    let result = `${daysDiff} days ago`;
+    return result;
+  //checks if time is less than a day and greater than or equal to one hour
+  } else if (timeDiff >= 3600000 && timeDiff < 86400000) {
+    let result = Math.floor(timeDiff/ (1000 * 60 * 60));
+    return `${result} hours ago`;
+  //checks if time is less than one hour and greater than or equal to one minute
+  } else if (timeDiff >= 60000 && timeDiff < 3600000){
+    let result = Math.floor(timeDiff / (1000 * 60));
+    return `${result} minutes ago`;
+  //checks if time is less than one minute
+  } else if (timeDiff >= 0 && timeDiff < 60000) {
+    let result = Math.floor(timeDiff/ 1000);
+    return `${result} seconds ago`;
+  }
 }
 
 function createTweetElement(tweet) {
@@ -66,9 +59,9 @@ function createTweetElement(tweet) {
   $($tweet).append(`<image id="profile-picture" src=${tweet.user.avatars.small} />`);
   $($tweet).append(`<h2 class="user-name">${tweet.user.name}</h2>`);
   $($tweet).append(`<span class="user-handle">${tweet.user.handle}</span>`);
-  $($tweet).append(`<span class="tweet">${tweet.content.text}</span>`);
+  $($tweet).append(`<span class="tweet">${escape(tweet.content.text)}</span>`);
   $($tweet).append(`<p class="horizontal-line"></p>`);
-  $($tweet).append(`<span class="age">${tweet.created_at}</span>`);
+  $($tweet).append(`<span class="age">${tweetDate(tweet.created_at)}</span>`);
   $($tweet).append(`<i id="flag" class="fa fa-flag"></i>`);
   $($tweet).append(`<i id="retweet" class="fa fa-retweet"></i>`);
   $($tweet).append(`<i id="like" class="fa fa-heart"></i>`);
@@ -76,6 +69,59 @@ function createTweetElement(tweet) {
   return $tweet;
 }
 
-renderTweets(data);
+//turns form data from submitted tweet into a query string
+//and prevents page change when tweet is submitted
+$(document).ready(function() {
+  $( "#form" ).on( "submit", function( event ) {
+    let tweet = $(".text").val();
+    if (tweet === "" || tweet === null) {
+        alert('you did not enter a tweet');
+        event.preventDefault();
+        console.log(tweet.length);
+      }
+    else if (tweet.length > 140) {
+      alert('your tweet must under 140 characters');
+        event.preventDefault();
+    }
+    else {
+      event.preventDefault();
+      $.ajax({
+          url: '/tweets/',
+          method: 'POST',
+          data: $(this).serialize(),
+          error: function(error) {
+            console.log(error);
+          },
+          success: function(tweets) {
+            renderTweets(tweets);
+            $('textarea').val('');
+
+          }
+        });
+    }
+  });
+    $(".compose").click(function(){
+        if ($('.new-tweet').is(":hidden")) {
+          $(".new-tweet").slideToggle(200,'linear');
+          $('.text').focus();
+        }
+        else {
+          $(".new-tweet").slideToggle(200,'linear');
+        }
+    });
+
+     function loadTweets() {
+        $.ajax({
+          url: '/tweets',
+          method: 'GET',
+          success: function(tweets) {
+            renderTweets(tweets);
+          }
+        });
+      }
+      loadTweets();
+});
+
+
 
 

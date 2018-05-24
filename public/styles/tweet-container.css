@@ -55,8 +55,11 @@
 
 .tweet-container .tweet {
 
-  margin-top: 90px;
+  margin-top: 80px;
   margin-left: 15px;
+  margin-right: 10px;
+  /*word-wrap: break-word;*/
+  white-space: pre-line;
   position: absolute;
 }
 

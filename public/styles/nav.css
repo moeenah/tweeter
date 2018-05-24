@@ -7,6 +7,7 @@
   color: #e8fdff;
   position: fixed;
   z-index: 1;
+
 }
 
 #nav-bar .logo {
@@ -20,3 +21,63 @@
   font-size: 2rem;
   line-height: 86px;
 }
+
+.button {
+
+  right: 22px;
+  top: 8px;
+  position: absolute;
+}
+
+.compose {
+    height: 60px;
+    width: 115px;
+    padding-left: 30px;
+    background-color: #e2fff5;
+    font-size-adjust: 0.6;
+    border-color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size:1.2em;
+    color: #52a187;
+    font-weight: 600;
+}
+.compose:hover {
+    height: 60px;
+    width: 115px;
+    padding-left: 30px;
+    background-color: white;
+    font-size-adjust: 0.6;
+    border-color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size:1.2em;
+    color: black;
+    font-weight: 600;
+}
+
+
+
+.compose:focus {
+  outline: 0;
+}
+
+#icon {
+  top: 20px;
+  right: 85px;
+  font-size: 20px;
+  color: #52a187;
+  position: absolute;
+}
+
+.button:hover #icon {
+  top: 20px;
+  right: 85px;
+  font-size: 20px;
+  color: black;
+  position: absolute;
+}
+
+
+
+
