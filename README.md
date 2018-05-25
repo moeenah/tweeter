@@ -6,9 +6,16 @@ It is built using HTML, CSS, JS, jQuery and AJAX front-end skills, and Express a
 
 ## Final Product
 
+Composing a tweet
 !["Screenshot of composing tweet"](https://github.com/moeenah/tweeter/blob/master/docs/compose_tweet.png)
+Submitting a tweet
 !["Screenshot of submitted tweet"](https://github.com/moeenah/tweeter/blob/master/docs/submit_tweet.png)
+Updated home page
 !["Screenshot of tweet added to home page"](https://github.com/moeenah/tweeter/blob/master/docs/home_page.png)
+No text entered
+!["Screenshot of no text entered error alert"](https://github.com/moeenah/tweeter/blob/master/docs/no_text_error.png)
+Text entered is greater than 140 characters
+!["Screenshot of text entered is greater than 140 characters alert"](https://github.com/moeenah/tweeter/blob/master/docs/140char_error.png)
 
 ## Getting Started
 
