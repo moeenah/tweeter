@@ -73,10 +73,10 @@ $(document).ready(function() {
         url: '/tweets/',
         method: 'POST',
         data: $(this).serialize(),
-        success: function(tweets) {
-          loadTweets();
+        success: function(tweet) {
+          renderTweets(tweet);
           $('textarea').val('');
-          return;
+
         }
       });
     }
