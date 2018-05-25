@@ -2,7 +2,7 @@
   background-color: #eeeeef;
   border-color: #dcdcdc;
   border-radius: 5px;
-  height:150px;
+  height:170px;
   margin-left: 2em;
   margin-right: 2em;
 }
@@ -15,10 +15,11 @@
 }
 
 .new-tweet .text {
+  resize: none;
   margin-left: 0.5em;
   margin-right: 0.5em;
   width: 370px;
-  height: 50px;
+  height: 70px;
 }
 
 .new-tweet input {

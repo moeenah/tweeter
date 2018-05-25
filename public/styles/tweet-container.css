@@ -16,8 +16,6 @@
 
 .tweet-container:hover {
   opacity: 1;
-  border-style: solid;
-  border-width: thin;
   border-color: #657f87;
 }
 

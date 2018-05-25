@@ -82,13 +82,13 @@ $(document).ready(function() {
     }
   });
 
-  $(".compose").click(function(){
+  $(".button").click(function(){
       if ($('.new-tweet').is(":hidden")) {
-        $(".new-tweet").slideToggle(200,'linear');
+        $(".new-tweet").slideToggle(200);
         $('.text').focus();
       }
       else {
-        $(".new-tweet").slideToggle(200,'linear');
+        $(".new-tweet").slideToggle(200);
       }
   });
 
