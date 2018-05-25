@@ -1,6 +1,6 @@
 #nav-bar {
   height: 80px;
-  width: 100vw;
+  width: 100%;
   padding-left: 2em;
   padding-right: 2em;
   background-color : #00a087;
@@ -55,8 +55,6 @@
     color: black;
     font-weight: 600;
 }
-
-
 
 .compose:focus {
   outline: 0;

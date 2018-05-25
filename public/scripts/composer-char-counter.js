@@ -13,7 +13,7 @@ $(document).ready(function() {
     $( "#form" ).on( "submit", function( event ) {
       if (chars < 0) {
         $(".counter").text(chars);
-      } else if (chars > 0) {
+      } else if (chars >= 0) {
         $('.counter').text("140");
       }
     });

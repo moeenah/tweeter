@@ -36,11 +36,9 @@ module.exports = function(DataHelpers) {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        res.status(201).json(tweet);
+        res.status(201).send();
       }
     });
   });
-
   return tweetsRoutes;
-
-}
+};

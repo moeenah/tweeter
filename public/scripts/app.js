@@ -1,28 +1,13 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-
-
-
 function renderTweets(tweets) {
-
-
   if (tweets instanceof Array) {
     tweets.forEach(function(user) {
     let $data = createTweetElement(user);
-    $(document).ready(function() {
-      $('.container').prepend($data).prepend($('.new-tweet'));
-    });
+    $('.container').prepend($data).prepend($('.new-tweet'));
   });
   } else {
     let $data = createTweetElement(tweets);
-    $(document).ready(function() {
-      $('.container').prepend($data).prepend($('.new-tweet'));
-    });
-}
-
+    $('.container').prepend($data).prepend($('.new-tweet'));
+  }
 }
 
 function escape(str) {
@@ -58,15 +43,15 @@ function tweetDate (date) {
 
 function createTweetElement(tweet) {
   let $tweet = $('<section>').addClass('tweet-container');
-  $($tweet).append(`<image id="profile-picture" src=${tweet.user.avatars.small} />`);
   $($tweet).append(`<h2 class="user-name">${tweet.user.name}</h2>`);
+  $($tweet).append(`<image id="profile-picture" src=${tweet.user.avatars.small} />`);
   $($tweet).append(`<span class="user-handle">${tweet.user.handle}</span>`);
   $($tweet).append(`<span class="tweet">${escape(tweet.content.text)}</span>`);
   $($tweet).append(`<p class="horizontal-line"></p>`);
   $($tweet).append(`<span class="age">${tweetDate(tweet.created_at)}</span>`);
-  $($tweet).append(`<i id="flag" class="fa fa-flag"></i>`);
-  $($tweet).append(`<i id="retweet" class="fa fa-retweet"></i>`);
   $($tweet).append(`<i id="like" class="fa fa-heart"></i>`);
+  $($tweet).append(`<i id="retweet" class="fa fa-retweet"></i>`);
+  $($tweet).append(`<i id="flag" class="fa fa-flag"></i>`);
 
   return $tweet;
 }
@@ -79,51 +64,43 @@ $(document).ready(function() {
     if (tweet === "" || tweet === null) {
         alert('you did not enter a tweet');
         event.preventDefault();
-        console.log(tweet.length);
-      }
-    else if (tweet.length > 140) {
-      alert('your tweet must under 140 characters');
+      } else if (tweet.length > 140) {
+        alert('your tweet must under 140 characters');
         event.preventDefault();
-    }
-    else {
+    } else {
       event.preventDefault();
       $.ajax({
-          url: '/tweets/',
-          method: 'POST',
-          data: $(this).serialize(),
-          error: function(error) {
-            console.log(error);
-          },
-          success: function(tweets) {
-            renderTweets(tweets);
-            $('textarea').val('');
-
-          }
-        });
+        url: '/tweets/',
+        method: 'POST',
+        data: $(this).serialize(),
+        success: function(tweets) {
+          loadTweets();
+          $('textarea').val('');
+          return;
+        }
+      });
     }
   });
-    $(".compose").click(function(){
-        if ($('.new-tweet').is(":hidden")) {
-          $(".new-tweet").slideToggle(200,'linear');
-          $('.text').focus();
-        }
-        else {
-          $(".new-tweet").slideToggle(200,'linear');
-        }
-    });
 
-     function loadTweets() {
-        $.ajax({
-          url: '/tweets',
-          method: 'GET',
-          success: function(tweets) {
-            renderTweets(tweets);
-          }
-        });
+  $(".compose").click(function(){
+      if ($('.new-tweet').is(":hidden")) {
+        $(".new-tweet").slideToggle(200,'linear');
+        $('.text').focus();
       }
-      loadTweets();
+      else {
+        $(".new-tweet").slideToggle(200,'linear');
+      }
+  });
+
+   function loadTweets() {
+      $.ajax({
+        url: '/tweets',
+        method: 'GET',
+        success: function(tweets) {
+          renderTweets(tweets);
+
+        }
+      });
+    }
+    loadTweets();
 });
-
-
-
-
