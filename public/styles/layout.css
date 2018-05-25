@@ -29,3 +29,16 @@ main {
   padding-top: 140px;
   padding-bottom: 40px;
 }
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #52a187;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: black;
+}
