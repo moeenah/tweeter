@@ -4,6 +4,12 @@ Tweeter is a simple, single-page Twitter clone.
 
 It is built using HTML, CSS, JS, jQuery and AJAX front-end skills, and Express and MongoDB back-end skills.
 
+## Final Product
+
+!["Screenshot of composing tweet"](https://github.com/moeenah/tweeter/blob/master/docs/compose_tweet.png)
+!["Screenshot of submitted tweet"](https://github.com/moeenah/tweeter/blob/master/docs/submit_tweet.png)
+!["Screenshot of tweet added to home page"](https://github.com/moeenah/tweeter/blob/master/docs/home_page.png)
+
 ## Getting Started
 
 1. Fork this repository, then clone your fork of this repository.
