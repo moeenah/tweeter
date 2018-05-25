@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   overflow-y: scroll;
+  zoom: 125%;
 }
 *, *:before, *:after {
   box-sizing: inherit;
